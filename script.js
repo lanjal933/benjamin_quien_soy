@@ -55,7 +55,7 @@
 
   /* ---------- Manifiesto: palabras ---------- */
   const mt = $('#manifestoText');
-  const hotWords = ['movimiento', 'ritmo', 'historia', 'intención', 'IA', 'vender'];
+  const hotWords = ['agente', 'agentes', 'IA', 'n8n', 'WhatsApp', 'atiende', 'califica', 'vender'];
   const words = mt.textContent.trim().split(/\s+/);
   mt.textContent = '';
   const wEls = words.map((w, i) => {
@@ -129,6 +129,25 @@
     work.style.height = (trackDist + innerHeight) + 'px';
   }
 
+  /* ---------- Curso: reveal + contadores ---------- */
+  const rv = $$('[data-rv]');
+  $$('.course__list li').forEach((li, i) => li.style.setProperty('--d', i));
+  const counters = $$('[data-count]').map(el => ({ el, to: +el.dataset.count, done: false }));
+  if (reduce) counters.forEach(c => c.el.textContent = c.to);
+  function courseTick(vh) {
+    rv.forEach(el => { if (el.getBoundingClientRect().top < vh * .88) el.classList.add('in'); });
+    counters.forEach(c => {
+      if (c.done || c.el.getBoundingClientRect().top > vh * .9) return;
+      c.done = true;
+      const t0 = performance.now();
+      (function step(t) {
+        const k = clamp((t - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
+        c.el.textContent = Math.round(c.to * e);
+        if (k < 1) requestAnimationFrame(step);
+      })(t0);
+    });
+  }
+
   /* ---------- Contacto ---------- */
   const cTitle = $$('#contactTitle span');
   const magnet = $('#magnet');
@@ -183,6 +202,8 @@
       n.classList.toggle('live', live);
       if (dotEls[i]) dotEls[i].classList.toggle('live', live);
     });
+
+    courseTick(vh);
 
     // TRABAJO
     const wp = clamp((y - work.offsetTop) / (work.offsetHeight - vh));

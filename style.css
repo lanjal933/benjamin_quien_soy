@@ -6,7 +6,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--bg);overflow-x:clip}
-body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 .grad{background:linear-gradient(90deg,var(--a),var(--b),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
 .eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:.6rem}
@@ -57,7 +57,7 @@ a{color:inherit;text-decoration:none}
 .manifesto__text .w.hot{color:var(--a)}
 
 /* FLOW */
-.flow{padding:14vh var(--pad) 16vh;max-width:1300px;margin:auto}
+.flow{padding:14vh var(--pad) 16vh;max-width:1300px;margin:auto;overflow-x:clip}
 .section-head h2{font-size:clamp(2rem,5.6vw,4.8rem);line-height:1;letter-spacing:-.035em;margin:1.2rem 0 8vh}
 .flow__body{position:relative;display:flex;flex-direction:column;gap:14vh;padding:4vh 0}
 .flow__svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
@@ -74,6 +74,23 @@ a{color:inherit;text-decoration:none}
 .node p{color:var(--mute)}
 .flow__dot{fill:var(--bg);stroke:var(--line);stroke-width:3;transition:stroke .5s,fill .5s,r .5s}
 .flow__dot.live{stroke:var(--a);fill:var(--a)}
+
+/* COURSE */
+.course{padding:10vh var(--pad) 12vh;max-width:1300px;margin:auto}
+.course__card{background:linear-gradient(160deg,var(--bg2),#0f1015);border:1px solid var(--line);border-radius:28px;padding:clamp(24px,4vw,56px);display:grid;gap:2.2rem;opacity:0;transform:translateY(60px) scale(.97);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.course__card.in{opacity:1;transform:none}
+.badge{display:inline-block;border:1px solid var(--a);color:var(--a);border-radius:99px;padding:3px 14px;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase}
+.course__top h3{font-size:clamp(1.5rem,3.4vw,2.8rem);letter-spacing:-.03em;line-height:1.05;margin:1rem 0}
+.course__top p{color:var(--mute);max-width:62ch}
+.course__stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;border-block:1px solid var(--line);padding:1.6rem 0}
+.course__stats b{display:block;font-size:clamp(2.2rem,6vw,4.6rem);letter-spacing:-.04em;line-height:1}
+.course__stats b::after{content:"+";color:var(--a)}
+.course__stats span{color:var(--mute);font-size:.9rem}
+.course__list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem 2rem}
+.course__list li{position:relative;padding-left:1.6rem;opacity:0;transform:translateX(-24px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--d,0)*90ms)}
+.course__list li.in{opacity:1;transform:none}
+.course__list li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--a)}
+.course .btn{justify-self:start}
 
 /* WORK */
 .work{position:relative}
@@ -98,7 +115,7 @@ a{color:inherit;text-decoration:none}
 .vis--7{background:radial-gradient(circle at 50% 50%,var(--a) 0 8%,transparent 9%),repeating-conic-gradient(from 0deg at 50% 50%,#ffb34744 0 6deg,transparent 6deg 15deg),#14110a}
 
 /* CONTACT */
-.contact{min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:2.5rem;padding:14vh var(--pad);max-width:1300px;margin:auto}
+.contact{overflow-x:clip;min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:2.5rem;padding:14vh var(--pad);max-width:1300px;margin:auto}
 .contact__title{font-size:clamp(2.6rem,9vw,8rem);line-height:.95;letter-spacing:-.045em;font-weight:800}
 .contact__title span{display:block;overflow:hidden}
 .contact__title span{transform:translateX(var(--sx,0));opacity:var(--so,1)}
@@ -125,5 +142,5 @@ a{color:inherit;text-decoration:none}
   .work__track{overflow-x:auto;width:auto}
   .line .ch,.hero__sub{animation:none;transform:none;opacity:1}
   .manifesto__text .w{opacity:1}
-  .node{opacity:1;transform:none}
+  .node,.course__card,.course__list li{opacity:1;transform:none}
 }
