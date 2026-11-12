@@ -91,32 +91,34 @@
     </div>
   </section>
 
-  <!-- CURSO -->
+  <!-- CURSO (pinned) -->
   <section class="course" id="curso">
-    <div class="section-head">
-      <p class="eyebrow">Formación</p>
-      <h2>Donde aprendí a <br>construir <span class="grad">agentes.</span></h2>
-    </div>
-    <div class="course__card" data-rv>
-      <div class="course__top">
+    <div class="course__sticky">
+      <div class="course__left">
+        <p class="eyebrow">Formación</p>
+        <h2>Donde aprendí a <br>construir <span class="grad">agentes.</span></h2>
         <span class="badge">Udemy</span>
         <h3>n8n: Agentes y automatizaciones de IA (¡sin código!)</h3>
-        <p>90+ plantillas de n8n para crear agentes de IA y automatizar con OpenAI, Retell, MCP y RAG. Curso de Krystian Wojtarowicz y Damian Danelczyk que recomiendo y que me sirve de base para lo que construyo.</p>
+        <p class="course__desc">90+ plantillas de n8n para crear agentes de IA y automatizar con OpenAI, Retell, MCP y RAG. Curso de Krystian Wojtarowicz y Damian Danelczyk que recomiendo y que me sirve de base para lo que construyo.</p>
+        <div class="course__stats">
+          <div><b data-count="19">0</b><span>secciones</span></div>
+          <div><b data-count="141">0</b><span>clases</span></div>
+          <div><b data-count="38">0</b><span>horas</span></div>
+        </div>
+        <a class="btn" href="https://www.udemy.com/course/curso-n8n/" target="_blank" rel="noopener">Ver el curso en Udemy →</a>
       </div>
-      <div class="course__stats">
-        <div><b data-count="19">0</b><span>secciones</span></div>
-        <div><b data-count="141">0</b><span>clases</span></div>
-        <div><b data-count="38">0</b><span>horas de contenido</span></div>
+      <div class="course__right">
+        <div class="course__count"><b id="cNum">01</b><span>/ 06</span></div>
+        <ul class="course__list" id="cList">
+          <li>Agentes de IA y equipos de agentes</li>
+          <li>Agentes de voz con Retell AI, ElevenLabs y VAPI</li>
+          <li>Agentes RAG con Pinecone y Supabase</li>
+          <li>MCP (Protocolo de Contexto de Modelo) en n8n</li>
+          <li>Agentes en WhatsApp, Telegram y Gmail</li>
+          <li>Autoalojar n8n con control total de los datos</li>
+        </ul>
+        <div class="course__bar"><i id="cBar"></i></div>
       </div>
-      <ul class="course__list">
-        <li data-rv>Agentes de IA y equipos de agentes</li>
-        <li data-rv>Agentes de voz con Retell AI, ElevenLabs y VAPI</li>
-        <li data-rv>Agentes RAG con Pinecone y Supabase</li>
-        <li data-rv>MCP (Protocolo de Contexto de Modelo) en n8n</li>
-        <li data-rv>Agentes en WhatsApp, Telegram y Gmail</li>
-        <li data-rv>Autoalojar n8n con control total de los datos</li>
-      </ul>
-      <a class="btn" href="https://www.udemy.com/course/curso-n8n/" target="_blank" rel="noopener">Ver el curso en Udemy →</a>
     </div>
   </section>
 
@@ -166,6 +168,7 @@
 
   <!-- CONTACTO -->
   <section class="contact" id="contacto">
+   <div class="contact__sticky">
     <p class="eyebrow">Contacto</p>
     <h2 class="contact__title" id="contactTitle">
       <span>Hagamos que</span>
@@ -174,6 +177,7 @@
     </h2>
     <a class="btn btn--big" id="magnet" href="https://contra.com/benjamin_rocco_herrera_s9kqkxfp" target="_blank" rel="noopener">Escribime en Contra →</a>
     <p class="contact__note">Crysantem IA — agentes y automatizaciones con IA, páginas web y software self-hosted para empresas.</p>
+   </div>
   </section>
 </main>
 

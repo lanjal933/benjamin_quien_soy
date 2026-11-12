@@ -129,27 +129,23 @@
     work.style.height = (trackDist + innerHeight) + 'px';
   }
 
-  /* ---------- Curso: reveal + contadores ---------- */
-  const rv = $$('[data-rv]');
-  $$('.course__list li').forEach((li, i) => li.style.setProperty('--d', i));
-  const counters = $$('[data-count]').map(el => ({ el, to: +el.dataset.count, done: false }));
-  if (reduce) counters.forEach(c => c.el.textContent = c.to);
-  function courseTick(vh) {
-    rv.forEach(el => { if (el.getBoundingClientRect().top < vh * .88) el.classList.add('in'); });
-    counters.forEach(c => {
-      if (c.done || c.el.getBoundingClientRect().top > vh * .9) return;
-      c.done = true;
-      const t0 = performance.now();
-      (function step(t) {
-        const k = clamp((t - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
-        c.el.textContent = Math.round(c.to * e);
-        if (k < 1) requestAnimationFrame(step);
-      })(t0);
-    });
+  /* ---------- Curso (pin) ---------- */
+  const course = $('#curso'), cItems = $$('#cList li'), cNum = $('#cNum'), cBar = $('#cBar');
+  const counters = $$('[data-count]').map(el => ({ el, to: +el.dataset.count }));
+  if (reduce) { counters.forEach(c => c.el.textContent = c.to); cItems.forEach(li => li.classList.add('active')); }
+  function courseTick(y, vh) {
+    const p = clamp((y - course.offsetTop) / (course.offsetHeight - vh));
+    const k = clamp(p / .22), e = 1 - Math.pow(1 - k, 3);
+    counters.forEach(c => c.el.textContent = Math.round(c.to * e));
+    const idx = Math.min(cItems.length - 1, Math.floor(clamp((p - .18) / .78) * cItems.length));
+    cItems.forEach((li, i) => { li.classList.toggle('active', i === idx && p > .1); li.classList.toggle('done', i < idx && p > .1); });
+    cNum.textContent = String(idx + 1).padStart(2, '0');
+    cBar.style.transform = `scaleX(${p})`;
   }
 
   /* ---------- Contacto ---------- */
   const cTitle = $$('#contactTitle span');
+  const contact = $('#contacto');
   const magnet = $('#magnet');
   const progress = $('#progress');
 
@@ -203,7 +199,7 @@
       if (dotEls[i]) dotEls[i].classList.toggle('live', live);
     });
 
-    courseTick(vh);
+    courseTick(y, vh);
 
     // TRABAJO
     const wp = clamp((y - work.offsetTop) / (work.offsetHeight - vh));
@@ -214,14 +210,15 @@
       p.style.transform = `translate3d(${t * -60}px,0,0) scale(${1.08 + Math.abs(t) * .05}) rotate(${t * 4}deg)`;
     });
 
-    // CONTACTO: líneas entran desde lados alternos
-    const cr = $('#contactTitle').getBoundingClientRect();
-    const cp = clamp((vh - cr.top) / (vh * .7));
+    // CONTACTO (pin)
+    const cp = clamp((y - contact.offsetTop) / (contact.offsetHeight - vh));
+    const tp = clamp(cp / .45);
     cTitle.forEach((s, i) => {
-      const dir = i % 2 ? 1 : -1;
-      s.style.setProperty('--sx', `${dir * (1 - cp) * 40}vw`);
-      s.style.setProperty('--so', clamp(cp * 1.6 - i * .15));
+      const dir = i % 2 ? 1 : -1, q = clamp(tp * 1.5 - i * .3);
+      s.style.setProperty('--sx', `${dir * Math.pow(1 - q, 2) * 60}vw`);
+      s.style.setProperty('--so', q);
     });
+    contact.style.setProperty('--bo', clamp((cp - .4) / .25));
   }
 
   function tick() {
